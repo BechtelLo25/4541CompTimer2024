@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class Testing {
+public class CompSchedule {
     
     public static void main(String[] args) {
 
@@ -85,9 +85,6 @@ public class Testing {
 
             }
             
-            System.out.println(compSchedule);
-
-
             return compSchedule;
 
         } catch (Exception e) {
