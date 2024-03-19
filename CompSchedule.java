@@ -66,25 +66,18 @@ public class CompSchedule {
             String SortTeamNums = webPull;
 
             for (int i = 0; i < count; i++) {
-                compSchedule += "Qualification " + SortResponse.substring(SortResponse.indexOf("ation") + 6, SortResponse.indexOf("start") - 3) + ": ";
-                compSchedule += "Red 1: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
-                SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
-                compSchedule += "Red 2: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
-                SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
-                compSchedule += "Red 3: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
-                SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
-                compSchedule += "Blue 1: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
-                SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
-                compSchedule += "Blue 2: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
-                SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
-                compSchedule += "Blue 3: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + "";
+                String[] colors = {"Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"};
 
-                compSchedule += " --- Expected Start Time: " + SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3) + "\n";
+                for (String color : colors) {
+                    compSchedule += color + ": " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
+                    SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
+                }
 
+                compSchedule += "\t --- Expected Start Time: " + SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3) + "\n";
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
             }
-            
+
             return compSchedule;
 
         } catch (Exception e) {

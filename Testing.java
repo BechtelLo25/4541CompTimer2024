@@ -79,7 +79,7 @@ public class Testing {
                 SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
                 compSchedule += "Blue 3: " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + "";
 
-                compSchedule += " --- Expected Start Time: " + SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3) + "\n";
+                compSchedule += "\t --- Expected Start Time: " + SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3) + "\n";
 
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
