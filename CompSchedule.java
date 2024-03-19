@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class CompSchedule {
+
+    public static StandardTimeConverter standardTimeConverter = new StandardTimeConverter();
     
     public static void main(String[] args) {
 
@@ -73,7 +75,7 @@ public class CompSchedule {
                     SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
                 }
 
-                compSchedule += "\t --- Expected Start Time: " + SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3) + "\n";
+                compSchedule += "\t --- Expected Start Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3)) + "\n\n";
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
             }
