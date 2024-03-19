@@ -1,3 +1,4 @@
+package util;
 public class StandardTimeConverter {
     
     public String getStandardTime(String militaryTime) {

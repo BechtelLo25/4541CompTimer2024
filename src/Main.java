@@ -1,3 +1,4 @@
+package src;
 // Championship event id - CHCMP
 // Ashland VA event id - VAASH
 // Blacksburg VA event id - VABLA

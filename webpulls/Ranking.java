@@ -1,3 +1,4 @@
+package webpulls;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -9,38 +10,19 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class FirstInfo {
+import util.StandardTimeConverter;
 
-    public String getCurrentSeason() {
-            
-        String apiUrl = "https://frc-api.firstinspires.org/v3.0/";
+public class Ranking {
 
-        try {
-            HttpClient client = HttpClient.newHttpClient();
-        
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(apiUrl))
-                    .header("accept", "text/plain")
-                    .GET()
-                    .build();
-        
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    public static StandardTimeConverter standardTimeConverter = new StandardTimeConverter();
 
-            return response.body().substring(response.body().indexOf("Season") + 8, response.body().indexOf("maxSea") - 2);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return "Error";
-    }
-
-
-    public String getCurrentGameName() {
+    public static String get4541Ranking(String eventID) {
 
         try {
 
-            String apiUrl = "https://frc-api.firstinspires.org/v3.0/2024";
+            String ranking = "";
+
+            String apiUrl = "https://frc-api.firstinspires.org/v3.0/2024/rankings/" + eventID + "?teamNumber=4541&top=";
 
             URL url = new URL(apiUrl);
 
@@ -63,10 +45,17 @@ public class FirstInfo {
             }
             in.close();
 
-            System.out.println("Response: " + response.toString()); 
-            
             connection.disconnect();
-            return response.toString().substring(response.toString().indexOf("Name") + 7, response.toString().indexOf("kick") - 6);
+
+            String webPull = response.toString();
+
+            ranking += "Current Rank: " + webPull.substring(webPull.indexOf("rank") + 6, webPull.indexOf("team") - 2);
+            ranking += "     Ranking Score: " + webPull.substring(webPull.indexOf("Order1") + 8, webPull.indexOf("sortOrder2") - 2);
+            ranking += "     Record: " + webPull.substring(webPull.indexOf("wins") + 6, webPull.indexOf("losses") - 2) + "-" + 
+                             webPull.substring(webPull.indexOf("losses") + 8, webPull.indexOf("ties") - 2) + "-" + 
+                             webPull.substring(webPull.indexOf("ties") + 6, webPull.indexOf("qualAverage") - 2);
+
+            return ranking;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,5 +64,4 @@ public class FirstInfo {
         }
 
     }
-
 }

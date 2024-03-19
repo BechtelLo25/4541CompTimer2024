@@ -1,3 +1,4 @@
+package webpulls;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -9,16 +10,11 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import util.StandardTimeConverter;
+
 public class CompSchedule {
 
     public static StandardTimeConverter standardTimeConverter = new StandardTimeConverter();
-    
-    public static void main(String[] args) {
-
-
-        get4541CompSchedule("MDSEV");
-
-    }
 
     public static String get4541CompSchedule(String eventID) {
 
@@ -70,12 +66,14 @@ public class CompSchedule {
             for (int i = 0; i < count; i++) {
                 String[] colors = {"Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"};
 
+                compSchedule += "Qualification " + SortResponse.substring(SortResponse.indexOf("ation") + 6, SortResponse.indexOf("start") - 3) + ": ";
+
                 for (String color : colors) {
                     compSchedule += color + ": " + SortTeamNums.substring(SortTeamNums.indexOf("teamNumber") + 12, SortTeamNums.indexOf("station") - 2) + " ";
                     SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
                 }
 
-                compSchedule += "\t --- Expected Start Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3)) + "\n\n";
+                compSchedule += "\tExpected Start Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3)) + "\n\n";
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
             }
