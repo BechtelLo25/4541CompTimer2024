@@ -64,13 +64,13 @@ public class Frame {
         }
     }
 
-    public void addComponents(JLabel label1, JLabel label2, JLabel label3, JTextArea compInfo, JPanel panel, JFrame frame, JLabel label4) {
+    public void addComponents(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JPanel panel, JFrame frame, JLabel rankingInfo) {
 
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
+        panel.add(welcome);
+        panel.add(currentSeasonInfo);
+        panel.add(clock);
         panel.add(compInfo);
-        panel.add(label4);
+        panel.add(rankingInfo);
 
         frame.add(panel);
 
@@ -79,34 +79,34 @@ public class Frame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void setVisuals(JLabel label1, JLabel label2, JLabel label3, JTextArea compInfo, JLabel label4) {
+    public void setVisuals(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo) {
 
         Font introFont = new Font("Trebuchet MS", Font.BOLD, 30);
         Font clockFont = new Font("Trebuchet MS", Font.BOLD, 50);
         Font compInfoFont = new Font("Trebuchet MS", Font.BOLD, 16);
 
-        label1.setFont(introFont);
-        label2.setFont(introFont);
-        label3.setFont(clockFont);
+        welcome.setFont(introFont);
+        currentSeasonInfo.setFont(introFont);
+        clock.setFont(clockFont);
         compInfo.setFont(compInfoFont);
-        label4.setFont(introFont);
+        rankingInfo.setFont(introFont);
 
-        label1.setForeground(Color.WHITE);
-        label2.setForeground(Color.WHITE);
-        label3.setForeground(Color.WHITE);
+        welcome.setForeground(Color.WHITE);
+        currentSeasonInfo.setForeground(Color.WHITE);
+        clock.setForeground(Color.WHITE);
         compInfo.setForeground(Color.WHITE);
-        label4.setForeground(Color.WHITE);
+        rankingInfo.setForeground(Color.WHITE);
 
         compInfo.setBackground(Color.DARK_GRAY);
         compInfo.setBorder(new LineBorder(Color.WHITE, 2));
     }
 
-    public void setPositions(JLabel label1, JLabel label2, JLabel label3, JTextArea compInfo, JLabel label4) {
+    public void setPositions(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo) {
 
-        label1.setBounds(560, 0, 750, 30);
-        label2.setBounds(600, 30, 750, 30);
-        label3.setBounds(700, 60, 500, 50);
+        welcome.setBounds(560, 0, 750, 30);
+        currentSeasonInfo.setBounds(600, 30, 750, 30);
+        clock.setBounds(700, 60, 500, 50);
         compInfo.setBounds(50, 120, 1600, 600);
-        label4.setBounds(100, 750, 1250, 40);
+        rankingInfo.setBounds(50, 750, 1250, 40);
     }
 }
