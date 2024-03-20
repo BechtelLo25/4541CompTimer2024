@@ -37,8 +37,6 @@ public class APIPuller {
 
         connection.disconnect();
 
-        String webPull = response.toString();
-
-        return webPull;
+        return response.toString();
     }
 }

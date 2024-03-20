@@ -1,12 +1,9 @@
 package webpulls;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import util.APIPuller;
 
 public class EventTeams {
+
+    public static APIPuller apiPuller = new APIPuller();
     
     public static String getEventTeams(String eventID) {
 
@@ -14,32 +11,8 @@ public class EventTeams {
 
             String teamList = "";
 
-            String apiUrl = "https://frc-api.firstinspires.org/v3.0/2024/teams?eventCode=" + eventID;
-
-            URL url = new URL(apiUrl);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("GET");
-
-            String username = "LoganFRC618";
-            String password = "83dc87d4-987f-4959-a0bc-51db9b70c2e4";
-            String auth = username + ":" + password;
-            byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
-            String authHeaderValue = "Basic " + new String(encodedAuth);
-            connection.setRequestProperty("Authorization", authHeaderValue);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            connection.disconnect();
-
-            String sortResponse = response.toString();
+            String response = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/teams?eventCode=" + eventID);
+            String sortResponse = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/teams?eventCode=" + eventID);
 
             for(int i = 0; i < Integer.parseInt(response.toString().substring(response.toString().indexOf("Total") + 7, response.toString().indexOf("teamCountPage") - 2)); i++) {
 
