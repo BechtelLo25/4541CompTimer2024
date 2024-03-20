@@ -24,13 +24,13 @@ public class Frame {
 
         JFrame frame = new JFrame("4541 Comp Timer");
 
-        JLabel label1 = new JLabel("Welcome to the 4541 competition timer!");
-        JLabel label2 = new JLabel("Current Season: " + firstInfo.getCurrentGameName() + " - " + firstInfo.getCurrentSeason());
-        JLabel label3 = new JLabel();
+        JLabel welcome = new JLabel("Welcome to the 4541 competition timer!");
+        JLabel currentSeasonInfo = new JLabel("Current Season: " + firstInfo.getCurrentGameName() + " - " + firstInfo.getCurrentSeason());
+        JLabel clock = new JLabel();
 
         JTextArea compInfo = new JTextArea(CompSchedule.get4541CompSchedule(eventID));
 
-        JLabel label4 = new JLabel(Ranking.get4541Ranking(eventID));
+        JLabel rankingInfo = new JLabel(Ranking.get4541Ranking(eventID));
 
         JPanel panel = new JPanel(null) {
 
@@ -46,18 +46,18 @@ public class Frame {
             }
         };
 
-        setVisuals(label1, label2, label3, compInfo, label4);
-        setPositions(label1, label2, label3, compInfo, label4);
-        addComponents(label1, label2, label3, compInfo, panel, frame, label4);
+        setVisuals(welcome, currentSeasonInfo, clock, compInfo, rankingInfo);
+        setPositions(welcome, currentSeasonInfo, clock, compInfo, rankingInfo);
+        addComponents(welcome, currentSeasonInfo, clock, compInfo, panel, frame, rankingInfo);
 
         while (true) {
             updateFrequency++; 
 
-            label3.setText(Clock.getCurrentTime());
+            clock.setText(Clock.getCurrentTime());
 
             if(updateFrequency == 5000000) {
                 compInfo.setText(CompSchedule.get4541CompSchedule(eventID));
-                label4.setText(Ranking.get4541Ranking(eventID));
+                rankingInfo.setText(Ranking.get4541Ranking(eventID));
                 updateFrequency = 0;
             }
             
