@@ -12,8 +12,8 @@ public class CompSchedule {
     public static APIPuller apiPuller = new APIPuller();
 
     public static ArrayList<String> qualifiers = new ArrayList<>();
+    public static ArrayList<String> teamColors = new ArrayList<>();
     public static boolean qualifiersRecieved = false;
-    public static int qualCount = 0;
 
     public static String get4541CompSchedule(String eventID) {
 
@@ -37,6 +37,7 @@ public class CompSchedule {
 
             String SortResponse = webPull;
             String SortTeamNums = webPull;
+            String SortTeamColor = webPull;
 
             for (int i = 0; i < count; i++) {
                 String[] colors = {"Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"};
@@ -45,6 +46,10 @@ public class CompSchedule {
 
                 if(qualifiersRecieved == false) {
                     qualifiers.add(SortResponse.substring(SortResponse.indexOf("ation") + 6, SortResponse.indexOf("start") - 3));
+
+                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf("4541"));
+                    teamColors.add(SortTeamColor.substring(SortTeamColor.indexOf("4541") + 16, SortTeamColor.indexOf("surrogate") - 4));
+                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf("4541") + 1);
                 }
 
                 for (String color : colors) {
@@ -55,31 +60,61 @@ public class CompSchedule {
                 compSchedule += "\tExpected Start Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3));
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
-                compSchedule += "\t" + getMatchStats(eventID, qualifiers.get(i)) + "\n\n";
+                compSchedule += getMatchStats(eventID, qualifiers.get(i), teamColors.get(i)) + "\n\n";
 
             }
             qualifiersRecieved = true;
+            System.out.println(teamColors);
 
             return compSchedule;
 
         } catch (Exception e) {
             e.printStackTrace();
 
-            return "Error";
+            return "No Data";
         }
 
     }
 
-    public static String getMatchStats(String eventID, String qualifier) throws IOException {
+    public static String getMatchStats(String eventID, String qualifier, String color) throws IOException {
 
-        String stats = "";
-        String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/scores/" + eventID + "/qual?matchNumber=" + qualifier + "&start=&end=");
+        try {
+            String stats = "";
+            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/scores/" + eventID + "/qual?matchNumber=" + qualifier + "&start=&end=");
 
-        stats += webPull.substring(webPull.indexOf("totalPoints") + 13, webPull.indexOf("Red") - 15);
+            int blueScore = Integer.parseInt(webPull.substring(webPull.indexOf("totalPoints") + 13, webPull.indexOf("Red") - 15));
+            webPull = webPull.substring(webPull.indexOf("totalPoints") + 20);
+            int redScore = Integer.parseInt(webPull.substring(webPull.indexOf("totalPoints") + 13, webPull.indexOf("}]}]}")));
+
+            stats += "\tBlue Total Points: " + blueScore;
+            stats += "\tRed Total Points: " + redScore;
+
+            if(color.equals("Red")) {
+                if (redScore > blueScore) {
+                    stats += "\tWin";
+                } else if (redScore < blueScore) {
+                    stats += "\tLoss";
+                } else {
+                    stats += "\tTie";
+                }
+            } else {
+                if (redScore > blueScore) {
+                    stats += "\tLoss";
+                } else if (redScore < blueScore) {
+                    stats += "\tWin";
+                } else {
+                    stats += "\tTie";
+                }
+            }
+
+            return stats;
+
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return "No Data";
+        }
         
-        qualCount++;
-
-        return stats;
 
     }
 }

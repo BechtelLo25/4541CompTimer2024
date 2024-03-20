@@ -55,7 +55,7 @@ public class Frame {
 
             clock.setText(Clock.getCurrentTime());
 
-            if(updateFrequency == 5000000) {
+            if(updateFrequency == 2000000) {
                 compInfo.setText(CompSchedule.get4541CompSchedule(eventID));
                 rankingInfo.setText(Ranking.get4541Ranking(eventID));
                 updateFrequency = 0;
@@ -106,7 +106,7 @@ public class Frame {
         welcome.setBounds(560, 0, 750, 30);
         currentSeasonInfo.setBounds(600, 30, 750, 30);
         clock.setBounds(700, 60, 500, 50);
-        compInfo.setBounds(50, 120, 1600, 600);
+        compInfo.setBounds(15, 120, 1670, 600);
         rankingInfo.setBounds(50, 750, 1250, 40);
     }
 }

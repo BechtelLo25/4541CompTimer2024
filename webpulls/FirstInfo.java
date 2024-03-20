@@ -30,7 +30,7 @@ public class FirstInfo {
             e.printStackTrace();
         }
         
-        return "Error";
+        return "No Data";
     }
 
 
@@ -45,7 +45,7 @@ public class FirstInfo {
         } catch (Exception e) {
             e.printStackTrace();
 
-            return "Error";
+            return "No Data";
         }
 
     }

@@ -25,7 +25,7 @@ public class EventTeams {
         } catch (Exception e) {
             e.printStackTrace();
 
-            return "Error";
+            return "No Data";
         }
 
     }
