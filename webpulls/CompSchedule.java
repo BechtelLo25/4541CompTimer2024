@@ -57,7 +57,9 @@ public class CompSchedule {
                     SortTeamNums = SortTeamNums.substring(SortTeamNums.indexOf("station") + 7);
                 }
 
-                compSchedule += "\tExpected Start Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3));
+                compSchedule += "\tColor: " + teamColors.get(i);
+
+                compSchedule += "\tStart Time: " + standardTimeConverter.getStandardTime(SortResponse.substring(SortResponse.indexOf("startTime") + 23, SortResponse.indexOf("matchNumber") - 3));
                 SortResponse = SortResponse.substring(SortResponse.indexOf("Blue3") + 7);
 
                 compSchedule += getMatchStats(eventID, qualifiers.get(i), teamColors.get(i)) + "\n\n";
