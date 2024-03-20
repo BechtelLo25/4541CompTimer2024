@@ -94,7 +94,7 @@ public class CompSchedule {
                     stats += "\tWin";
                 } else if (redScore < blueScore) {
                     stats += "\tLoss";
-                } else {
+                } else if (redScore == blueScore) {
                     stats += "\tTie";
                 }
             } else {
@@ -102,7 +102,7 @@ public class CompSchedule {
                     stats += "\tLoss";
                 } else if (redScore < blueScore) {
                     stats += "\tWin";
-                } else {
+                } else if (redScore == blueScore) {
                     stats += "\tTie";
                 }
             }
