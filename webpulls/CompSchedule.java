@@ -66,7 +66,6 @@ public class CompSchedule {
 
             }
             qualifiersRecieved = true;
-            System.out.println(teamColors);
 
             return compSchedule;
 
@@ -108,15 +107,41 @@ public class CompSchedule {
                     stats += "\tTie";
                 }
             }
-
+            
             return stats;
 
         } catch(Exception e) {
             e.printStackTrace();
 
-            return "No Data";
+            return "";
         }
         
 
+    }
+
+    public static int getAmountOfMatches(String eventID) {
+        
+        try {
+
+            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/schedule/" + eventID + "?tournamentLevel=qual&teamNumber=&start=&end=");
+            String target = "matchNumber";
+            int count = 0;
+            int lastIndex = 0;
+
+            while (lastIndex != -1) {
+                lastIndex = webPull.indexOf(target, lastIndex);
+                if (lastIndex != -1) {
+                    count++;
+                    lastIndex += target.length();
+                }
+            }
+            return count;
+            
+        } catch (Exception e) {
+            
+        }
+        return 200;
+
+        
     }
 }

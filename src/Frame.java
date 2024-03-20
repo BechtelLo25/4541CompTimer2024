@@ -1,5 +1,7 @@
 package src;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -72,6 +74,8 @@ public class Frame {
         panel.add(compInfo);
         panel.add(rankingInfo);
 
+        compInfo.setFocusTraversalKeysEnabled(false);
+
         frame.add(panel);
 
         frame.setSize(1920, 1080);
@@ -108,5 +112,12 @@ public class Frame {
         clock.setBounds(700, 60, 500, 50);
         compInfo.setBounds(15, 120, 1670, 600);
         rankingInfo.setBounds(50, 750, 1250, 40);
+
+        compInfo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                e.consume(); // Consume the key event
+            }
+        });
     }
 }
