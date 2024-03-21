@@ -15,15 +15,15 @@ public class CompSchedule {
     public static ArrayList<String> teamColors = new ArrayList<>();
     public static boolean qualifiersRecieved = false;
 
-    public static String get4541CompSchedule(String eventID) {
+    public static String getCompSchedule(String eventID, String teamNum) {
 
         try {
 
             String compSchedule = "";
 
 
-            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/schedule/" + eventID + "?tournamentLevel=qual&teamNumber=4541&start=&end=");
-            String target = "4541";
+            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/schedule/" + eventID + "?tournamentLevel=qual&teamNumber=" + teamNum + "&start=&end=");
+            String target = teamNum;
             int count = 0;
             int lastIndex = 0;
 
@@ -47,9 +47,9 @@ public class CompSchedule {
                 if(qualifiersRecieved == false) {
                     qualifiers.add(SortResponse.substring(SortResponse.indexOf("ation") + 6, SortResponse.indexOf("start") - 3));
 
-                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf("4541"));
-                    teamColors.add(SortTeamColor.substring(SortTeamColor.indexOf("4541") + 16, SortTeamColor.indexOf("surrogate") - 4));
-                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf("4541") + 1);
+                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf(teamNum));
+                    teamColors.add(SortTeamColor.substring(SortTeamColor.indexOf(teamNum) + 16, SortTeamColor.indexOf("surrogate") - 4));
+                    SortTeamColor = SortTeamColor.substring(SortTeamColor.indexOf(teamNum) + 1);
                 }
 
                 for (String color : colors) {
@@ -115,8 +115,6 @@ public class CompSchedule {
 
             return "";
         }
-        
-
     }
 
     public static int getAmountOfMatches(String eventID) {
@@ -181,4 +179,5 @@ public class CompSchedule {
         }
         return "Not Queing";
     }
+
 }

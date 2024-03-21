@@ -8,12 +8,12 @@ public class Ranking {
 
     public static StandardTimeConverter standardTimeConverter = new StandardTimeConverter();
 
-    public static String get4541Ranking(String eventID) {
+    public static String getRanking(String eventID, String teamNum) {
 
         try {
 
             String ranking = "";
-            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/rankings/" + eventID + "?teamNumber=4541&top=");
+            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/rankings/" + eventID + "?teamNumber=" + teamNum + "&top=");
 
             double rankingScore = Double.parseDouble(webPull.substring(webPull.indexOf("Order1") + 8, webPull.indexOf("sortOrder2") - 2));
             int rankingPoints = (int) (rankingScore * (Integer.parseInt(webPull.substring(webPull.indexOf("Played") + 8, webPull.indexOf("}]}")))));
