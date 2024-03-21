@@ -67,6 +67,8 @@ public class CompSchedule {
             }
             qualifiersRecieved = true;
 
+            System.out.print(getCurrentMatch(eventID));
+
             return compSchedule;
 
         } catch (Exception e) {
@@ -141,6 +143,37 @@ public class CompSchedule {
             
         }
         return 200;
+    }
+
+    public static int getCurrentMatch(String eventID) {
+        
+        int currentMatch = 0;
+
+        try {
+
+           
+            boolean currentMatchRecieved = false;
+
+            String webPull = apiPuller.pullFromAPI("https://frc-api.firstinspires.org/v3.0/2024/matches/" + eventID + "?tournamentLevel=qual&teamNumber=&matchNumber=&start=&end=");
+
+            while(currentMatchRecieved == false){
+                if (webPull.substring(webPull.indexOf("scoreRedFinal") + 15, webPull.indexOf("scoreRedFoul") - 2).equals("null")) {
+                    currentMatchRecieved = true;
+                } else {
+                    currentMatch++;
+                    webPull = webPull.substring(webPull.indexOf("scoreBlueFinal") + 1);
+                }
+            }
+            
+            return currentMatch;
+
+        } catch (Exception e) {
+            
+            return currentMatch;
+        }
+         
+
+        
 
         
     }
