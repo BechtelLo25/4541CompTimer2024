@@ -170,14 +170,14 @@ public class CompSchedule {
         
     }
 
-    public static String getIfQueing(String eventID) {
+    public static String getIfQueuing(String eventID) {
 
         for(String qual : qualifiers) {
             if (getCurrentMatch(eventID) < Integer.parseInt(qual) && getCurrentMatch(eventID) >= Integer.parseInt(qual) - 3) {
-                return "Queing";
+                return "Queuing";
             } 
         }
-        return "Not Queing";
+        return "Not Queuing";
     }
 
 }

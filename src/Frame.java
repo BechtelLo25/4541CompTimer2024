@@ -34,7 +34,7 @@ public class Frame {
 
         JLabel rankingInfo = new JLabel(Ranking.getRanking(eventID, teamNum));
 
-        JLabel queStatus = new JLabel(CompSchedule.getIfQueing(eventID));
+        JLabel queueStatus = new JLabel(CompSchedule.getIfQueuing(eventID));
         JLabel githubLink = new JLabel("https://github.com/BechtelLo25/4541CompTimer2024");
 
         JPanel panel = new JPanel(null) {
@@ -51,9 +51,9 @@ public class Frame {
             }
         };
 
-        setVisuals(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queStatus, githubLink);
-        setPositions(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queStatus, githubLink);
-        addComponents(welcome, currentSeasonInfo, clock, compInfo, panel, frame, rankingInfo, queStatus, githubLink);
+        setVisuals(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queueStatus, githubLink);
+        setPositions(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queueStatus, githubLink);
+        addComponents(welcome, currentSeasonInfo, clock, compInfo, panel, frame, rankingInfo, queueStatus, githubLink);
 
         while (true) {
             updateFrequency++; 
@@ -63,21 +63,21 @@ public class Frame {
             if(updateFrequency == 2000000) {
                 compInfo.setText(CompSchedule.getCompSchedule(eventID, teamNum));
                 rankingInfo.setText(Ranking.getRanking(eventID, teamNum));
-                queStatus.setText(CompSchedule.getIfQueing(eventID));
+                queueStatus.setText(CompSchedule.getIfQueuing(eventID));
                 updateFrequency = 0;
             }
             
         }
     }
 
-    public void addComponents(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JPanel panel, JFrame frame, JLabel rankingInfo, JLabel queStatus, JLabel githubLink) {
+    public void addComponents(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JPanel panel, JFrame frame, JLabel rankingInfo, JLabel queueStatus, JLabel githubLink) {
 
         panel.add(welcome);
         panel.add(currentSeasonInfo);
         panel.add(clock);
         panel.add(compInfo);
         panel.add(rankingInfo);
-        panel.add(queStatus);
+        panel.add(queueStatus);
         panel.add(githubLink);
 
         compInfo.setFocusTraversalKeysEnabled(false);
@@ -89,12 +89,12 @@ public class Frame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void setVisuals(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queStatus, JLabel githubLink) {
+    public void setVisuals(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queueStatus, JLabel githubLink) {
 
         Font introFont = new Font("Trebuchet MS", Font.BOLD, 30);
         Font clockFont = new Font("Trebuchet MS", Font.BOLD, 50);
         Font compInfoFont = new Font("Trebuchet MS", Font.BOLD, 16);
-        Font queFont = new Font("Trebuchet MS", Font.BOLD, 75);
+        Font queueFont = new Font("Trebuchet MS", Font.BOLD, 75);
         Font githubLinkFont = new Font("Trebuchet MS", Font.BOLD, 18);
 
         welcome.setFont(introFont);
@@ -102,7 +102,7 @@ public class Frame {
         clock.setFont(clockFont);
         compInfo.setFont(compInfoFont);
         rankingInfo.setFont(introFont);
-        queStatus.setFont(queFont);
+        queueStatus.setFont(queueFont);
         githubLink.setFont(githubLinkFont);
 
         welcome.setForeground(Color.WHITE);
@@ -110,21 +110,21 @@ public class Frame {
         clock.setForeground(Color.WHITE);
         compInfo.setForeground(Color.WHITE);
         rankingInfo.setForeground(Color.WHITE);
-        queStatus.setForeground(Color.WHITE);
+        queueStatus.setForeground(Color.WHITE);
         githubLink.setForeground(Color.WHITE);
 
         compInfo.setBackground(Color.DARK_GRAY);
         compInfo.setBorder(new LineBorder(Color.WHITE, 2));
     }
 
-    public void setPositions(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queStatus, JLabel githubLink) {
+    public void setPositions(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queueStatus, JLabel githubLink) {
 
         welcome.setBounds(560, 0, 750, 30);
         currentSeasonInfo.setBounds(600, 30, 750, 30);
         clock.setBounds(700, 60, 500, 50);
         compInfo.setBounds(15, 120, 1670, 600);
         rankingInfo.setBounds(50, 750, 1250, 40);
-        queStatus.setBounds(1225, 728, 1250, 90);
+        queueStatus.setBounds(1225, 728, 1250, 90);
         githubLink.setBounds(25, 75, 500, 50);
 
         compInfo.addKeyListener(new KeyAdapter() {
