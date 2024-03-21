@@ -34,6 +34,8 @@ public class Frame {
 
         JLabel rankingInfo = new JLabel(Ranking.get4541Ranking(eventID));
 
+        JLabel queStatus = new JLabel(CompSchedule.getIfQueing(eventID));
+
         JPanel panel = new JPanel(null) {
 
             @Override
@@ -48,9 +50,9 @@ public class Frame {
             }
         };
 
-        setVisuals(welcome, currentSeasonInfo, clock, compInfo, rankingInfo);
-        setPositions(welcome, currentSeasonInfo, clock, compInfo, rankingInfo);
-        addComponents(welcome, currentSeasonInfo, clock, compInfo, panel, frame, rankingInfo);
+        setVisuals(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queStatus);
+        setPositions(welcome, currentSeasonInfo, clock, compInfo, rankingInfo, queStatus);
+        addComponents(welcome, currentSeasonInfo, clock, compInfo, panel, frame, rankingInfo, queStatus);
 
         while (true) {
             updateFrequency++; 
@@ -60,19 +62,21 @@ public class Frame {
             if(updateFrequency == 2000000) {
                 compInfo.setText(CompSchedule.get4541CompSchedule(eventID));
                 rankingInfo.setText(Ranking.get4541Ranking(eventID));
+                queStatus.setText(CompSchedule.getIfQueing(eventID));
                 updateFrequency = 0;
             }
             
         }
     }
 
-    public void addComponents(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JPanel panel, JFrame frame, JLabel rankingInfo) {
+    public void addComponents(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JPanel panel, JFrame frame, JLabel rankingInfo, JLabel queStatus) {
 
         panel.add(welcome);
         panel.add(currentSeasonInfo);
         panel.add(clock);
         panel.add(compInfo);
         panel.add(rankingInfo);
+        panel.add(queStatus);
 
         compInfo.setFocusTraversalKeysEnabled(false);
 
@@ -83,35 +87,39 @@ public class Frame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void setVisuals(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo) {
+    public void setVisuals(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queStatus) {
 
         Font introFont = new Font("Trebuchet MS", Font.BOLD, 30);
         Font clockFont = new Font("Trebuchet MS", Font.BOLD, 50);
         Font compInfoFont = new Font("Trebuchet MS", Font.BOLD, 16);
+        Font queFont = new Font("Trebuchet MS", Font.BOLD, 75);
 
         welcome.setFont(introFont);
         currentSeasonInfo.setFont(introFont);
         clock.setFont(clockFont);
         compInfo.setFont(compInfoFont);
         rankingInfo.setFont(introFont);
+        queStatus.setFont(queFont);
 
         welcome.setForeground(Color.WHITE);
         currentSeasonInfo.setForeground(Color.WHITE);
         clock.setForeground(Color.WHITE);
         compInfo.setForeground(Color.WHITE);
         rankingInfo.setForeground(Color.WHITE);
+        queStatus.setForeground(Color.WHITE);
 
         compInfo.setBackground(Color.DARK_GRAY);
         compInfo.setBorder(new LineBorder(Color.WHITE, 2));
     }
 
-    public void setPositions(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo) {
+    public void setPositions(JLabel welcome, JLabel currentSeasonInfo, JLabel clock, JTextArea compInfo, JLabel rankingInfo, JLabel queStatus) {
 
         welcome.setBounds(560, 0, 750, 30);
         currentSeasonInfo.setBounds(600, 30, 750, 30);
         clock.setBounds(700, 60, 500, 50);
         compInfo.setBounds(15, 120, 1670, 600);
         rankingInfo.setBounds(50, 750, 1250, 40);
+        queStatus.setBounds(1225, 728, 1250, 90);
 
         compInfo.addKeyListener(new KeyAdapter() {
             @Override

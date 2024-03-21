@@ -67,8 +67,6 @@ public class CompSchedule {
             }
             qualifiersRecieved = true;
 
-            System.out.print(getCurrentMatch(eventID));
-
             return compSchedule;
 
         } catch (Exception e) {
@@ -171,10 +169,16 @@ public class CompSchedule {
             
             return currentMatch;
         }
-         
-
         
+    }
 
-        
+    public static String getIfQueing(String eventID) {
+
+        for(String qual : qualifiers) {
+            if (getCurrentMatch(eventID) < Integer.parseInt(qual) && getCurrentMatch(eventID) >= Integer.parseInt(qual) - 3) {
+                return "Queing";
+            } 
+        }
+        return "Not Queing";
     }
 }
