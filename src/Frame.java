@@ -60,11 +60,13 @@ public class Frame {
 
             clock.setText(Clock.getCurrentTime());
 
-            if(updateFrequency == 2000000) {
+            if(updateFrequency == 1000000) {
                 compInfo.setText(CompSchedule.getCompSchedule(eventID, teamNum));
                 rankingInfo.setText(Ranking.getRanking(eventID, teamNum));
                 queueStatus.setText(CompSchedule.getIfQueuing(eventID));
                 updateFrequency = 0;
+
+                System.out.println("update occured");
             }
             
         }

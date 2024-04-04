@@ -15,6 +15,8 @@ public class Main {
 
         // Enter event ID and team number to use the app
         // Event ID is the state abbrieviation and the first 3 letter of the locality
-        frame.createMainPage("MDSEV", "4541");
+        frame.createMainPage("CHCMP", "4541");
     }
 }
+
+// Logan so goated
